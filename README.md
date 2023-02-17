@@ -9,6 +9,8 @@ Use the `parameters.py` file to specify:
 3. `START_DATE`: the earliest the articles are published (inclusive)
 4. `END_DATE`: the latest the articles are published (exclusive)
 5. `DAYS_PER_QUERY`: the number of days off links to gather per query to Google RSS
+6. `MIN_DELAY`: the min seconds to wait between queries
+7. `MAX_DELAY`: the max seconds to wait between queries
 
 
 ## Running the Scrapper
