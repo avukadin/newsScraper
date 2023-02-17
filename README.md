@@ -16,7 +16,8 @@ Use the `parameters.py` file to specify:
 ## Running the Scrapper
 
 1. Install all requirements from requirements.txt
-2. Run `scrape_news_articles.py`
+2. Edit `parameters.py` as you like
+3. Run `scrape_news_articles.py`
 
 All data is saved in CSV in the ./data folder.
 Note that in order to avoid being blocked by either Google RSS Feed or the news site itself, there is a delay between queries of 5 to 8 seconds by default. You may want to let this service run overnight, or change the delay time between queries.
