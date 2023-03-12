@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 from pkg.robustQuery import robustQuery
 
 
-class TextScrapper:
+class TextScraper:
 
     def scrapeLinks(self, links:list[str], extra_cols:dict[str,list[str]] = {}):
         for k,v in extra_cols.items():

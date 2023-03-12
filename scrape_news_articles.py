@@ -4,7 +4,7 @@ import pandas as pd
 
 import parameters as params
 from pkg.GoogleRSSParser import GoogleRSSParser
-from pkg.TextScrapper import TextScrapper
+from pkg.TextScraper import TextScraper
 
 if __name__ == "__main__":
     if not os.path.exists("./data"):
@@ -20,7 +20,7 @@ if __name__ == "__main__":
                            start_date=params.START_DATE,
                            end_date=params.END_DATE,
                            days_per_query=params.DAYS_PER_QUERY,
-                           query=query,
+                           keywords=query,
                            source=source
                        )
                 df.to_csv(links_file, index=False)
@@ -30,4 +30,4 @@ if __name__ == "__main__":
 
             # Gather Stories
             extra_cols = {'queries':[query]*len(df), "pudDates": list(df["pubDates"])}
-            TextScrapper().scrapeLinks(list(df['links']), extra_cols=extra_cols) 
+            TextScraper().scrapeLinks(list(df['links']), extra_cols=extra_cols) 
