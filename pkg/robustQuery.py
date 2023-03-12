@@ -20,5 +20,4 @@ def robustQuery(url:str, min_delay=MIN_DELAY, max_delay=MAX_DELAY, retries=3, ti
             print(response.content)
             print(f"Failed with status: {response.status_code} on attempt {n}, retrying.")
             print(f"Failed URL: {url}")
-            time.sleep((n+1)*2)
 

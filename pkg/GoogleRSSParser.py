@@ -11,7 +11,7 @@ from pkg.robustQuery import robustQuery
 class GoogleRSSParser:
     base_url = 'https://news.google.com/rss/search?q="{query}"+inurl:{source}+after:{start_date}+before:{end_date}'
 
-    def query_stories(self, start_date:datetime, end_date:datetime, query:str, source:str, days_per_query:int):
+    def query_stories(self, start_date:datetime, end_date:datetime, keywords:str, source:str, days_per_query:int):
         assert start_date<end_date, "require start_date<end_date"
         start_dates, end_dates = self._get_randomized_dates(start_date, end_date, days_per_query)
 
@@ -19,14 +19,14 @@ class GoogleRSSParser:
         threshold = 0
         count = 0
         for s, e in zip(start_dates, end_dates):
-            stories = self._make_query(s, e, query, source)
+            stories = self._make_query(s, e, keywords, source)
             dfs.append(stories)
 
             # Print status
             count += 1
             completed = round(100*count/len(start_dates),1)
             if completed>threshold:
-                print(f"Percent complete for {query} from {source}: {completed}%")
+                print(f"Percent complete for {keywords} from {source}: {completed}%")
                 threshold += 10
 
         df = pd.concat(dfs)
@@ -46,7 +46,9 @@ class GoogleRSSParser:
             "links": [item.link.get_text() for item in items]
         }
  
-        return pd.DataFrame(data)
+        df = pd.DataFrame(data)
+
+        return df
 
     def _make_url(self, start_date:datetime, end_date:datetime, query:str, source:str):
         s = start_date.strftime('%Y-%m-%d')

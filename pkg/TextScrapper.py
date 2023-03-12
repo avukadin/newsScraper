@@ -15,9 +15,9 @@ class TextScrapper:
         for k,v in extra_cols.items():
             assert len(v)==len(links), f"required len(extra_cols[{k}]) == len(links)"
 
-        if os.path.exists("./data/articles.csv"):
-            print("Collecting articles from checkpoint: ./data/articles.csv")
-            df = pd.read_csv("./data/articles.csv")
+        if os.path.exists("./data/scrapped.csv"):
+            print("Collecting articles from checkpoint: ./data/scrapped.csv")
+            df = pd.read_csv("./data/scrapped.csv")
         else:
             print("Collecting articles...")
             data = {'links':[], 'articles':[]}
@@ -36,8 +36,7 @@ class TextScrapper:
                 continue
 
             # Query
-            headers = {"Content-Type": "text/html; charset=utf-8"}
-            page = robustQuery(link, headers=headers)
+            page = robustQuery(link)
 
             soup = BeautifulSoup(page.content, "html.parser")
             txt = ' '.join([p.get_text() for p in soup.find_all("p")])
@@ -47,7 +46,7 @@ class TextScrapper:
             for k in extra_cols.keys():
                 data[k] = [extra_cols[k][i]]
             df = pd.concat([df, pd.DataFrame(data)])
-            df.to_csv("./data/articles.csv", index=False)
+            df.to_csv("./data/scrapped.csv", index=False)
 
             # Print status
             count += 1
