@@ -31,6 +31,3 @@ if __name__ == "__main__":
             # Gather Stories
             extra_cols = {'queries':[query]*len(df), "pudDates": list(df["pubDates"])}
             TextScrapper().scrapeLinks(list(df['links']), extra_cols=extra_cols) 
-
-
-
