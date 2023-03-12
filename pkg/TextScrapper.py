@@ -42,7 +42,7 @@ class TextScrapper:
             txt = ' '.join([p.get_text() for p in soup.find_all("p")])
 
             # Save
-            data = {'links':[link], "articles":[txt]}
+            data = {'links':[link], "text":[txt]}
             for k in extra_cols.keys():
                 data[k] = [extra_cols[k][i]]
             df = pd.concat([df, pd.DataFrame(data)])
