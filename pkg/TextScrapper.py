@@ -15,9 +15,9 @@ class TextScrapper:
         for k,v in extra_cols.items():
             assert len(v)==len(links), f"required len(extra_cols[{k}]) == len(links)"
 
-        if os.path.exists("./data/scrapped.csv"):
-            print("Collecting articles from checkpoint: ./data/scrapped.csv")
-            df = pd.read_csv("./data/scrapped.csv")
+        if os.path.exists("./data/scraped.csv"):
+            print("Collecting articles from checkpoint: ./data/scraped.csv")
+            df = pd.read_csv("./data/scraped.csv")
         else:
             print("Collecting articles...")
             data = {'links':[], 'articles':[]}
@@ -46,7 +46,7 @@ class TextScrapper:
             for k in extra_cols.keys():
                 data[k] = [extra_cols[k][i]]
             df = pd.concat([df, pd.DataFrame(data)])
-            df.to_csv("./data/scrapped.csv", index=False)
+            df.to_csv("./data/scraped.csv", index=False)
 
             # Print status
             count += 1
