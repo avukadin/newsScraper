@@ -20,7 +20,7 @@ class TextScraper:
             df = pd.read_csv("./data/scraped.csv")
         else:
             print("Collecting articles...")
-            data = {'links':[], 'articles':[]}
+            data = {'links':[], 'text':[]}
             # Add extra_cols
             for k in extra_cols.keys():
                 data[k] = [] 
